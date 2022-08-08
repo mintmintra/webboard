@@ -2,7 +2,14 @@ const express = require('express');
 const app = express();
 
 app.get('/', (request, response) => {
-    response.send('สวัสดีหน้าแรก Express !!')
+    console.log(request.query);
+    const { q, sortBy} = request.query;
+    response.send(`สวัสดีหน้าแรก Express !! q=${q}, sortBy=${sortBy}`)
+})
+
+app.get('/p/:postId', (request, response) => {
+    console.log(request.params);
+    response.send(`หน้าโพสเดี่ยวๆ`)
 })
 
 app.listen(9753, () => {
