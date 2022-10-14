@@ -7,6 +7,15 @@ app.get('/', (request, response) => {
     response.send(`สวัสดีหน้าแรก Express !! q=${q}, sortBy=${sortBy}`)
 })
 
+app.get('/p/new',(request, response) => {
+    response.send('ฟอร์มสร้างโพสต์ใหม่')
+})
+
+app.post('/p/new',(request,response) => {
+    console.log(request.body)
+    response.send('Submit Form')
+})
+
 app.get('/p/:postId', (request, response) => {
     console.log(request.params);
     const { postId } = request.params;
