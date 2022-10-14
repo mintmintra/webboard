@@ -9,7 +9,8 @@ app.get('/', (request, response) => {
 
 app.get('/p/:postId', (request, response) => {
     console.log(request.params);
-    response.send(`หน้าโพสเดี่ยวๆ`)
+    const { postId } = request.params;
+    response.send(`หน้าโพสเดี่ยวๆ ID=${postId}`)
 })
 
 app.listen(9753, () => {
