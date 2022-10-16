@@ -1,25 +1,31 @@
 const express = require('express');
+const hbs = require('hbs');
+const generalRouter = require('./routers/general');
+const postsRouter = require('./routers/posts')
 const app = express();
+app.use(express.urlencoded({extended: true}))
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
-app.get('/', (request, response) => {
-    console.log(request.query);
-    const { q, sortBy} = request.query;
-    response.send(`สวัสดีหน้าแรก Express !! q=${q}, sortBy=${sortBy}`)
-})
+app.use('/', generalRouter)
+app.use('/p', postsRouter)
 
 app.get('/p/new',(request, response) => {
-    response.send('ฟอร์มสร้างโพสต์ใหม่')
+    response.render('postNew')
 })
 
 app.post('/p/new',(request,response) => {
     console.log(request.body)
-    response.send('Submit Form')
+    const { title } = request.body ?? {};
+    response.send(`Submit Form Title=${title}`)
 })
 
 app.get('/p/:postId', (request, response) => {
     console.log(request.params);
     const { postId } = request.params;
-    response.send(`หน้าโพสเดี่ยวๆ ID=${postId}`)
+    const onePost = allPosts.find(post => post.id === +postId);
+    const customTitle = !!onePost ? `${onePost.title} | ` : 'ไม่พบเนื้อหา | '
+    response.render('postId', { onePost, customTitle });
 })
 
 app.listen(9753, () => {

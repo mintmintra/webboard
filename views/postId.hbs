@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> baseHead customTitle=customTitle}}
+<body>
+    {{> siteHeader }}
+    {{#if onePost }}
+        <div style="background-color: rgb(255,202,202);">
+            <h2>{{ onePost.title }}</h2>
+            <p>
+                <span>{{ onePost.from }} | </span>
+                <span>{{ onePost.createdAtText }}</span>
+            </p>
+        </div>
+    {{else}}
+        <p>ไม่พบโพสต์ที่คุณต้องการ</p>
+    {{/if}}
+    {{> siteFooter }}
+</body>
+</html>
