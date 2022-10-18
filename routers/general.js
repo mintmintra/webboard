@@ -2,13 +2,22 @@ const express = require('express');
 const db = require('../db');
 const router = express.Router();
 
-const allPosts = [
-    {id:2, title:'น่ารัก 222', from :'คนน่ารัก', createdAtText: '14 April 2022', commentsCount: 2},
-    {id:1, title:'น่ารัก 111', from :'คนน่ารัก', createdAtText: '10 April 2022', commentsCount: 0}
-]
 
-router.get('/', (request, response) => {
-    response.render('home',{allPosts})
+router.get('/', async (request, response) => {
+    let allPosts = [];
+    try {
+        allPosts = await db
+            .select('post.id', 'post.title', 'post.from', 'post.createdAt')
+            .count('comment.id as commentsCount')
+            .from('post')
+            .leftJoin('comment', 'post.id', 'comment.postId')
+            .groupBy('post.id')
+            .orderBy('post.id', 'desc')
+    }
+    catch (error) {
+        console.error(error)
+    }
+    response.render('home', { allPosts });
 })
 
 module.exports = router;
