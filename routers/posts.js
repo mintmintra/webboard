@@ -1,10 +1,8 @@
 const express = require('express');
+const db = require('../db');
+
 const router = express.Router();
 
-const allPosts = [
-    {id:2, title:'น่ารัก 222', from :'คนน่ารัก', createdAtText: '14 April 2022', commentsCount: 2},
-    {id:1, title:'น่ารัก 111', from :'คนน่ารัก', createdAtText: '10 April 2022', commentsCount: 0}
-]
 
 router.get('/new',(request, response) => {
     response.render('postNew')
@@ -16,10 +14,28 @@ router.post('/new',(request,response) => {
     response.send(`Submit Form Title=${title}`)
 })
 
-router.get('/:postId', (request, response) => {
-    console.log(request.params);
+router.get('/:postId', async (request, response) => {
     const { postId } = request.params;
-    const onePost = allPosts.find(post => post.id === +postId);
+
+    let onePost = null;
+    let postComments = [];
+    try{
+        //Get one post
+        const somePosts = await db
+            .select('*')
+            .from('post')
+            .where('id', +postId)
+        onePost = somePosts[0];
+
+        //Get post comments
+        postComments = db
+            .select('*')
+            .from('comment')
+            .where('postId', +postId)
+    }
+    catch (error){
+        console.log(err)
+    }
     const customTitle = !!onePost ? `${onePost.title} | ` : 'ไม่พบเนื้อหา | '
     response.render('postId', { onePost, customTitle });
 })
