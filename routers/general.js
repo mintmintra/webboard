@@ -1,4 +1,5 @@
 const express = require('express');
+const dayjs = require('dayjs');
 const db = require('../db');
 const router = express.Router();
 
@@ -13,6 +14,10 @@ router.get('/', async (request, response) => {
             .leftJoin('comment', 'post.id', 'comment.postId')
             .groupBy('post.id')
             .orderBy('post.id', 'desc')
+        allPosts = allPosts.map(post => {
+            const createdAtText = dayjs(post.createdAt).format('D MMM YYYY - HH:mm');
+            return {...post, createdAtText};
+        })
     }
     catch (error) {
         console.error(error)
