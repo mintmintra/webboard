@@ -37,7 +37,7 @@ router.get('/:postId', async (request, response) => {
         console.log(err)
     }
     const customTitle = !!onePost ? `${onePost.title} | ` : 'ไม่พบเนื้อหา | '
-    response.render('postId', { onePost, customTitle });
+    response.render('postId', { onePost, postComments, customTitle });
 })
 
 module.exports = router;
