@@ -10,9 +10,21 @@ router.get('/new',(request, response) => {
 })
 
 router.post('/new',(request,response) => {
-    console.log(request.body)
-    const { title } = request.body ?? {};
-    response.send(`Submit Form Title=${title}`)
+    const { title, content, from, accepted } = response.body ??  {};
+    try {
+        //Validation
+        if(!title || !content || !from){
+            throw new Error('no text');
+        }
+        else if(accepted != 'on'){
+            throw new Error('no accepted')
+        }
+        // Create post
+        await db.insert({ title, content, from }).into('post')
+    }
+    catch(error){
+        console.log(error);
+    }
 })
 
 router.get('/:postId', async (request, response) => {
