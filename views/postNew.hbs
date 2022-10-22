@@ -8,13 +8,13 @@
         <p>ฝากถามเพื่อนๆได้เลย</p>
         <form action="/p/new" method="post">
             <p>
-                <input type="text" name="title" placeholder="หัวข้อ">
+                <input type="text" name="title" placeholder="หัวข้อ" value="{{ values.title }}">
             </p>
             <p>
-                <textarea name="content" placeholder="เนื้อหา"></textarea>
+                <textarea name="content" placeholder="เนื้อหา">{{ values.content }}</textarea>
             </p>
             <p>
-                <input type="text" name="from" placeholder="จากคุณ">
+                <input type="text" name="from" placeholder="จากคุณ" value="{{ values.from }}">
             </p>
             <p>
                 <input id="input-accepted" type="checkbox" name="accepted">
@@ -23,6 +23,9 @@
             <p>
                 <button type="submit">สร้างโพสต์</button>
             </p>
+            {{#if errorMessage}}
+                <p>{{ errorMessage }}</p>
+            {{/if}}
         </form>
     </div>
     {{> siteFooter }}

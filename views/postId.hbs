@@ -12,6 +12,27 @@
             </p>
             <p>{{ onePost.content }}</p>
         </div>
+        <hr>
+            <form action="/p/{{ onePost.id }}/comment" method="post">
+            <p>
+                <textarea name="content" placeholder="แสดงความคิดเห็น">{{ values.content }}</textarea>
+            </p>
+            <p>
+                <input type="text" name="from" placeholder="จากคุณ" value="{{ values.from }}">
+            </p>
+            <p>
+                <input id="input-accepted" type="checkbox" name="accepted">
+                <label for="input-accepted">ยอมรับเงื่อนไข</label>
+            </p>
+            <p>
+                <button type="submit">คอมเม้นท์</button>
+            </p>
+            {{#if errorMessage}}
+                <p>{{ errorMessage }}</p>
+            {{/if}}
+        </form>
+        <hr>
+
         {{#if postComments }}
         <h4>{{ postComments.length }} คอมเม้นท์</h4>
     {{else}}
