@@ -9,8 +9,8 @@ router.get('/new',(request, response) => {
     response.render('postNew')
 })
 
-router.post('/new',(request,response) => {
-    const { title, content, from, accepted } = response.body ??  {};
+router.post('/new', async (request,response) => {
+    const { title, content, from, accepted } = request.body ??  {};
     try {
         //Validation
         if(!title || !content || !from){
@@ -24,7 +24,20 @@ router.post('/new',(request,response) => {
     }
     catch(error){
         console.log(error);
-    }
+        response.redirect('/p/new/done')
+        let errorMessage = 'พบข้อผิดพลาด';
+        if(error.message === 'no text'){
+            errorMessage = 'กรุณาใส่ข้อมูลให้ครบ'
+        }
+        else if(error.message === 'no accepted'){
+            errorMessage = 'กรุณาติ๊กถูกยอมรับ'
+        }
+        response.render('postNew', { errorMessage, values: {title, content, from}})
+        }
+})
+
+router.get('/new/done', (request, response) => {
+    response.render('postNewDone');
 })
 
 router.get('/:postId', async (request, response) => {
