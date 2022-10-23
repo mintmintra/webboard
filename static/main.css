@@ -1,0 +1,113 @@
+/* mali-regular - thai_latin */
+@font-face {
+    font-family: 'Mali';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('fonts/mali-v9-thai_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('fonts/mali-v9-thai_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* mali-600 - thai_latin */
+@font-face {
+    font-family: 'Mali';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+         url('fonts/mali-v9-thai_latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('fonts/mali-v9-thai_latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* General */
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html{
+    color: #333333;
+    font-family: 'Mali', sans-serif;
+    font-size: 14px; 
+    font-weight:  400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #111111;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+h1{
+    font-size: 24px;
+}
+
+h2{
+    font-size: 22px;
+}
+
+h3{
+    font-size: 20px;
+}
+
+h4{
+    font-size: 18px;
+}
+
+h5{
+    font-size: 16px;
+}
+
+h6{
+    font-size: 14px;
+}
+
+p{
+    line-height: 1.6;
+}
+
+a{
+    color: rgb(24, 179, 24);
+}
+
+hr{
+    border: 1px dashed rgb(150, 150, 150);
+}
+
+/* Header */
+
+.site-header{
+    background-color: white;
+    border-bottom: 1px solid rgb(150, 150, 150);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+}
+
+.site-header-item{
+    padding: 0px 12px;
+}
+
+.site-header-logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-header-logo img{
+    display: inline-block;
+    height: 35px;
+    margin-right: 8px;
+}
+
+.site-header-logo span{
+    color: #111111;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Site footer */
+
+.site-footer{
+    background-color: white;
+    border-top: 1px solid rgb(150, 150, 150);
+    text-align: center;
+}
