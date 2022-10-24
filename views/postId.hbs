@@ -3,53 +3,59 @@
 {{> baseHead customTitle=customTitle}}
 <body>
     {{> siteHeader }}
-    {{#if onePost }}
-        <div style="background-color: rgb(255,202,202);">
-            <h2>{{ onePost.title }}</h2>
-            <p>
-                <span>{{ onePost.from }} | </span>
-                <span>{{ onePost.createdAtText }}</span>
-            </p>
-            <p>{{ onePost.content }}</p>
-        </div>
-        <hr>
-            <form action="/p/{{ onePost.id }}/comment" method="post">
-            <p>
-                <textarea name="content" placeholder="แสดงความคิดเห็น">{{ values.content }}</textarea>
-            </p>
-            <p>
-                <input type="text" name="from" placeholder="จากคุณ" value="{{ values.from }}">
-            </p>
-            <p>
-                <input id="input-accepted" type="checkbox" name="accepted">
-                <label for="input-accepted">ยอมรับเงื่อนไข</label>
-            </p>
-            <p>
-                <button type="submit">คอมเม้นท์</button>
-            </p>
-            {{#if errorMessage}}
-                <p>{{ errorMessage }}</p>
-            {{/if}}
-        </form>
-        <hr>
+    <section class="section">
+        <div class="container">
+            {{#if onePost }}
+                <div class="box">
+                    <h2>{{ onePost.title }}</h2>
+                    <p>
+                        <span>{{ onePost.from }} | </span>
+                        <span class="text-gray">{{ onePost.createdAtText }}</span>
+                    </p>
+                    <div>{{ onePost.content }}</div>
+                </div>
+                <hr>
+                    <form action="/p/{{ onePost.id }}/comment" method="post">
+                    <p>
+                        <textarea name="content" placeholder="แสดงความคิดเห็น" rows="3">{{ values.content }}</textarea>
+                    </p>
+                    <p>
+                        <input type="text" name="from" placeholder="จากคุณ" value="{{ values.from }}">
+                    </p>
+                    <p>
+                        <input id="input-accepted" type="checkbox" name="accepted">
+                        <label for="input-accepted">ยอมรับเงื่อนไข</label>
+                    </p>
+                    <p>
+                        <button class="button" type="submit">คอมเม้นท์</button>
+                    </p>
+                    {{#if errorMessage}}
+                        <p>{{ errorMessage }}</p>
+                    {{/if}}
+                </form>
+                <hr>
 
-        {{#if postComments }}
-        <h4>{{ postComments.length }} คอมเม้นท์</h4>
-    {{else}}
-        <h4>ยังไม่มีคอมเม้นท์</h4>
-    {{/if}}
-    {{#each postComments }}
-        <div style="background-color: rgb(233, 233, 233);">
-            <p>
-                <span>{{ this.from }} | </span>
-                <span>{{ this.createdAtText }}</span>
-            </p>
-            <p>{{ this.content }}</p>
+                {{#if postComments }}
+                <h4>{{ postComments.length }} คอมเม้นท์</h4>
+            {{else}}
+                <h4>ยังไม่มีคอมเม้นท์</h4>
+            {{/if}}
+            {{#each postComments }}
+                <div class="box">
+                    <p>
+                        <span>{{ this.from }} | </span>
+                        <span class="text-gray">{{ this.createdAtText }}</span>
+                    </p>
+                    <div>{{ this.content }}</div>
+                </div>
+            {{/each}}
+            {{else}}
+                <p>ไม่พบโพสต์ที่คุณต้องการ</p>
+            {{/if}}
         </div>
-    {{/each}}
-    {{else}}
-        <p>ไม่พบโพสต์ที่คุณต้องการ</p>
-    {{/if}}
+    </section>
     {{> siteFooter }}
+    {{> siteScrollTop }}
+    {{> siteScripts }}
 </body>
 </html>
